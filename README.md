@@ -13,6 +13,8 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+Programmer, tinkerer, coffee-drinker.
+
 ![taylorom's github stats](https://github-readme-stats.vercel.app/api?username=taylortom&include_all_commits=true&count_private=true&show_icons=true&line_height=20&title_color=FFFFFF&icon_color=FFFFFF&text_color=FFFFFF&bg_color=0D1117)
 
 [![LCFC](https://img.shields.io/badge/supporter%20of-LCFC-blue)](https://www.lcfc.com/matches/standings)
