@@ -285,7 +285,7 @@ export default CustomTextWidget
 
 ### Step 5.1: Install Tiptap
 ```bash
-npm install @tiptap/react @tiptap/starter-kit @tiptap/extension-link
+npm install @tiptap/react @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
 ```
 
 ### Step 5.2: Create Inline Rich Text Component
@@ -295,6 +295,8 @@ import React from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
+
+import Underline from '@tiptap/extension-underline'
 
 const InlineRichText = ({ content, onChange }) => {
   const editor = useEditor({
@@ -309,6 +311,7 @@ const InlineRichText = ({ content, onChange }) => {
       Link.configure({
         openOnClick: false,
       }),
+      Underline,
     ],
     content: content,
     onUpdate: ({ editor }) => {
@@ -382,7 +385,7 @@ const SortableList = ({ items, onReorder }) => {
 
   const handleDragEnd = (event) => {
     const { active, over } = event
-    if (active.id !== over.id) {
+    if (over && active.id !== over.id) {
       const oldIndex = items.findIndex((item) => item.id === active.id)
       const newIndex = items.findIndex((item) => item.id === over.id)
       onReorder(arrayMove(items, oldIndex, newIndex))
@@ -745,10 +748,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
