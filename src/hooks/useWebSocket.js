@@ -7,3 +7,5 @@ export const useWebSocket = (event, callback) => {
     return () => socket.off(event, callback)
   }, [event, callback])
 }
+
+// Note: Callers should wrap the callback with useCallback to prevent unnecessary re-runs
