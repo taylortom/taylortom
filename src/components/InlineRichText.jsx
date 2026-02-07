@@ -19,15 +19,15 @@ const InlineRichText = ({ content, onChange }) => {
       }),
       Underline
     ],
-    content: content,
+    content,
     onUpdate: ({ editor }) => {
       onChange(editor.getJSON())
     }
   })
 
   return (
-    <div className="inline-rich-text">
-      <div className="toolbar">
+    <div className='inline-rich-text'>
+      <div className='toolbar'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor?.isActive('bold') ? 'active' : ''}

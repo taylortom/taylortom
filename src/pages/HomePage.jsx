@@ -6,7 +6,7 @@ function HomePage () {
     <div>
       <h1>Home Page</h1>
       <p>Welcome to My App!</p>
-      <Link to="/about">About</Link>
+      <Link to='/about'>About</Link>
     </div>
   )
 }
