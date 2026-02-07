@@ -14,10 +14,3 @@ Here are some ideas to get you started:
 -->
 
 # Programmer, tinkerer, coffee-drinker.
-
-![taylorom's github stats](https://github-readme-stats.vercel.app/api?username=taylortom&include_all_commits=true&count_private=true&show_icons=true&line_height=20&title_color=FFFFFF&icon_color=FFFFFF&text_color=FFFFFF&bg_color=0D1117)
-
-[![Gitter](https://img.shields.io/gitter/room/taylortom/taylortom?style=flat-square&logo=gitter&color=%23ED1965)](https://gitter.im/taylortom) 
-[![LinkedIn](https://img.shields.io/badge/message%20on-linkedin-%230a66c2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/thomas-taylor-6a38791a/)
-[![LCFC](https://img.shields.io/badge/supporter%20of-LCFC-blue?style=flat-square)](https://www.lcfc.com/matches/standings)
-<!--[![Spotify](https://img.shields.io/badge/listen-on%20spotify-%231cb954?style=flat-square&logo=spotify)](https://open.spotify.com/playlist/7MBOisOHZ8zA0wQBokvzNd)-->
