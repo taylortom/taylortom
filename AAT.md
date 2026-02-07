@@ -15,25 +15,17 @@ Lightweight, flexible, no framework lock-in.
 ---
 ## ✅ Data + networking
 
-Server state (REST + WebSockets)
-
-TanStack Query (React Query)
+### Server state (REST + WebSockets) : TanStack Query (React Query)
 Handles:
-
-fetch lifecycle
-
-caching
-
-retries
-
-mutations
-
-background refetch
-
+- fetch lifecycle
+- caching
+- retries
+- mutations
+- background refetch
 
 This keeps your UI logic clean since your app is predominantly server-state driven.
 
-Realtime
+Realtime:
 
 Native WebSockets (or Socket.IO if you already use it server-side)
 
@@ -41,63 +33,44 @@ Native WebSockets (or Socket.IO if you already use it server-side)
 
 ---
 
-✅ Forms + JSON Schema
+## ✅ Forms + JSON Schema
 
 Since your backend owns validation and exposes full JSON Schema:
 
-Schema-driven UI
-
-react-jsonschema-form (RJSF)
-
+### Schema-driven UI : react-jsonschema-form (RJSF)
 
 Use it for:
-
-auto-generated forms
-
-property editors
-
-config panels
-
+- auto-generated forms
+- property editors
+- config panels
 
 Then extend with:
-
-custom widgets (e.g. rich text)
-
-custom field layouts
-
+- custom widgets (e.g. rich text)
+- custom field layouts
 
 This fits your “UI consumes schema, server owns rules” model perfectly.
 
 
 ---
 
-✅ Rich text (inline only)
+## ✅ Rich text (inline only)
 
-You decided on:
-
-Inline editor
-
-Tiptap (MIT licensed)
+### Inline editor : Tiptap (MIT licensed)
 
 
 Configured narrowly to allow only:
 
-bold
-
-italic
-
-underline
-
-link (optional)
+- bold
+- italic
+- underline
+- link (optional)
 
 
 Key design choices:
 
-Store Tiptap JSON, not HTML
-
-Single shared <InlineRichText /> component
-
-No document-style features (no tables, headings, etc.)
+- Store Tiptap JSON, not HTML
+- Single shared <InlineRichText /> component
+- No document-style features (no tables, headings, etc.)
 
 
 This replaces CKEditor cleanly and avoids licensing ambiguity.
@@ -105,86 +78,49 @@ This replaces CKEditor cleanly and avoids licensing ambiguity.
 
 ---
 
-✅ Drag & drop (authoring layouts)
-
-@dnd-kit
+## ✅ Drag & drop (authoring layouts) : @dnd-kit
 
 
-Modern, actively maintained, composable.
+Modern, actively maintained, composable. Good for:
 
-Good for:
-
-block reordering
-
-page layout builders
-
-tree structures
-
+- block reordering
+- page layout builders
+- tree structures
 
 
 ---
 
-✅ UI components + theming
+## ✅ UI components + theming
 
 You have two viable paths — pick one:
 
-Option A (fastest to ship)
-
-MUI Core
-
+### Option A (fastest to ship) : MUI Core
 
 Pros:
 
-complete component set
-
-mature theming
-
-CSS variables for per-client reskins
-
-integrates nicely with RJSF
-
+- complete component set
+- mature theming
+- CSS variables for per-client reskins
+- integrates nicely with RJSF
 
 Avoid MUI X Pro (commercial).
 
 
----
-
-Option B (maximum visual control)
-
-Radix UI primitives
+### Option B (maximum visual control) : Radix UI primitives
 
 Your own LESS / CSS on top
 
 
 Pros:
 
-totally unstyled primitives
-
-perfect for custom design systems
-
-clean separation between behavior and appearance
-
-
-More work, more control.
-
+- totally unstyled primitives
+- perfect for custom design systems
+- clean separation between behavior and appearance
+- More work, more control.
 
 ---
 
-✅ Tables / grids (future)
-
-If/when you need serious tabular UI:
-
-TanStack Table (headless, you style it)
-
-
-Only move to something heavier if you truly need enterprise grid features.
-
-
----
-
-✅ Charts (future)
-
-Recharts
+## ✅ Charts (future) : Recharts
 
 
 Simple React charts, good enough for dashboards/analytics.
@@ -192,21 +128,16 @@ Simple React charts, good enough for dashboards/analytics.
 
 ---
 
-✅ Security (important for ISO + pen tests)
+## ✅ Security (important for ISO + pen tests)
 
-Content safety
-
-Canonical storage = structured JSON
-
-If HTML is ever rendered:
-
-sanitize with DOMPurify
-
-enforce strict CSP
+- Content safety
+- Canonical storage = structured JSON
+- If HTML is ever rendered:
+  - sanitize with DOMPurify
+  - enforce strict CSP
 
 
-
-Architecture rules
+## Architecture rules
 
 GPL frontend must not import proprietary JS
 
