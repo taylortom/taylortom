@@ -548,7 +548,7 @@ Update `package.json` scripts:
 }
 ```
 
-Standard.js requires no configuration file - it works out of the box with sensible defaults for JavaScript and React.
+Standard.js works out of the box with sensible defaults for JavaScript and React. If customization is needed (e.g., ignoring files or adding globals), configuration options are available through package.json.
 
 ### Step 10.2: Setup Configuration File
 Create `config/app.config.js`:
@@ -564,9 +564,10 @@ export default {
 }
 ```
 
-Import and use in your app:
+Import and use in your app (adjust path based on file location):
 ```javascript
-import config from './config/app.config.js'
+// From src/ directory
+import config from '../config/app.config.js'
 
 // Use config values directly
 const apiClient = createApiClient(config.apiUrl)
