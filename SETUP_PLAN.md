@@ -42,7 +42,8 @@ Update the generated `package.json` with:
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
+    "lint": "standard",
+    "lint:fix": "standard --fix"
   }
 }
 ```
@@ -413,7 +414,7 @@ export default SortableList
 
 ## Phase 7: UI Components & Theming
 
-### Option A: Install MUI Core (Recommended for faster shipping)
+### Install MUI Core
 ```bash
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 ```
@@ -447,14 +448,6 @@ import { theme } from './theme'
   <App />
 </ThemeProvider>
 ```
-
-### Option B: Install Radix UI (For maximum visual control)
-```bash
-npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-select @radix-ui/react-tabs
-npm install less
-```
-
-Create custom styles in `src/styles/components.less` and import in components as needed.
 
 ## Phase 8: Charts (Future Use)
 
@@ -537,316 +530,51 @@ export const retrieveContent = (jsonString) => {
 }
 ```
 
-## Phase 10: Architecture Rules & Licensing
+## Phase 10: Development Tools
 
-### Step 10.1: Create License Verification
-Create `scripts/verify-licenses.js`:
-```javascript
-import { readFileSync } from 'fs'
-
-const checkLicenses = () => {
-  const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'))
-  const allowedLicenses = ['MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC']
-  
-  console.log('Verifying all dependencies have compatible licenses...')
-  // Add license checking logic using license-checker or similar tool
-}
-
-checkLicenses()
+### Step 10.1: Install Standard.js for Linting
+```bash
+npm install --save-dev standard
 ```
 
-Add to `package.json` scripts:
+Update `package.json` scripts:
 ```json
 "scripts": {
-  "verify-licenses": "node scripts/verify-licenses.js"
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "lint": "standard",
+  "lint:fix": "standard --fix"
 }
 ```
 
-### Step 10.2: Setup Project Structure for GPL Compliance
-Create `.gitignore`:
-```
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
+Standard.js requires no configuration file - it works out of the box with sensible defaults for JavaScript and React.
 
-# Testing
-coverage/
-
-# Production
-dist/
-build/
-
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-```
-
-Create `LICENSE` file with GPLv3:
-```
-GNU GENERAL PUBLIC LICENSE
-Version 3, 29 June 2007
-[Full GPL text]
-```
-
-### Step 10.3: Document Proprietary Boundary
-Create `ARCHITECTURE.md`:
-```markdown
-# Architecture Guidelines
-
-## GPL Frontend Separation
-- All frontend code in this repository is GPL-licensed
-- DO NOT import proprietary JavaScript modules in this codebase
-- SaaS extensions must be:
-  - Server-side only, OR
-  - In separate non-GPL bundles with clear boundaries
-
-## Client Customization
-- Use CSS variables for per-client theming
-- Store client-specific config in JSON Schema format
-- Never hardcode client-specific logic in core components
-```
-
-## Phase 11: Development Tools
-
-### Step 11.1: Install ESLint
-```bash
-npm install --save-dev eslint eslint-plugin-react eslint-plugin-react-hooks @eslint/js
-```
-
-Create `.eslintrc.cjs`:
+### Step 10.2: Setup Configuration File
+Create `config/app.config.js`:
 ```javascript
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  plugins: ['react', 'react-hooks'],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'warn',
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
+export default {
+  apiUrl: 'http://localhost:3001/api',
+  wsUrl: 'ws://localhost:3001',
+  appName: 'My App',
+  features: {
+    enableWebSockets: true,
+    enableCharts: true,
   },
 }
 ```
 
-### Step 11.2: Install Prettier (Optional)
-```bash
-npm install --save-dev prettier
-```
-
-Create `.prettierrc`:
-```json
-{
-  "semi": false,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "printWidth": 100
-}
-```
-
-### Step 11.3: Setup Environment Variables
-Create `.env.example`:
-```
-VITE_API_URL=http://localhost:3001/api
-VITE_WS_URL=ws://localhost:3001
-VITE_APP_NAME=My App
-```
-
-Create `.env`:
-```
-# Copy .env.example and fill in actual values
-```
-
-Add to `.gitignore`:
-```
-.env
-.env.local
-```
-
-## Phase 12: Testing Setup (Optional but Recommended)
-
-### Step 12.1: Install Vitest
-```bash
-npm install --save-dev vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
-```
-
-Create `vitest.config.js`:
+Import and use in your app:
 ```javascript
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
+import config from './config/app.config.js'
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './src/test/setup.js',
-  },
-})
+// Use config values directly
+const apiClient = createApiClient(config.apiUrl)
 ```
 
-Create `src/test/setup.js`:
-```javascript
-import '@testing-library/jest-dom'
-```
+## Phase 11: Verification Steps
 
-Add test script to `package.json`:
-```json
-"scripts": {
-  "test": "vitest",
-  "test:ui": "vitest --ui"
-}
-```
-
-## Phase 13: CI/CD Setup
-
-### Step 13.1: Create GitHub Actions Workflow
-Create `.github/workflows/ci.yml`:
-```yaml
-name: CI
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Lint
-      run: npm run lint
-    
-    - name: Build
-      run: npm run build
-    
-    - name: Test
-      run: npm run test
-```
-
-## Phase 14: Documentation
-
-### Step 14.1: Create README.md
-Create comprehensive `README.md`:
-```markdown
-# My App
-
-A modern React SPA built with Vite, featuring schema-driven forms, real-time updates, and a clean component architecture.
-
-## Tech Stack
-
-- **Build Tool**: Vite
-- **Framework**: React 18
-- **Routing**: React Router v7
-- **State Management**: TanStack Query
-- **Forms**: react-jsonschema-form
-- **Rich Text**: Tiptap
-- **Drag & Drop**: @dnd-kit
-- **UI**: Material-UI Core
-- **Charts**: Recharts
-- **Security**: DOMPurify + CSP
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-
-### Installation
-\`\`\`bash
-npm install
-\`\`\`
-
-### Development
-\`\`\`bash
-npm run dev
-\`\`\`
-
-### Build
-\`\`\`bash
-npm run build
-\`\`\`
-
-### Testing
-\`\`\`bash
-npm run test
-\`\`\`
-
-## Architecture
-
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for architectural guidelines and GPL compliance information.
-
-## License
-
-GPL-3.0
-```
-
-### Step 14.2: Create CONTRIBUTING.md
-```markdown
-# Contributing
-
-## Development Workflow
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
-
-## Code Standards
-- Follow ESLint configuration
-- Write tests for new features
-- Update documentation as needed
-- Ensure GPL compliance for all dependencies
-```
-
-## Phase 15: Verification Steps
-
-### Step 15.1: Verify Installation
+### Step 11.1: Verify Installation
 Run these commands to verify everything is set up correctly:
 ```bash
 # Install all dependencies
@@ -860,21 +588,15 @@ npm run build
 
 # Start development server
 npm run dev
-
-# Run tests (if configured)
-npm run test
-
-# Verify licenses
-npm run verify-licenses
 ```
 
-### Step 15.2: Create Initial Commit
+### Step 11.2: Create Initial Commit
 ```bash
 git add .
 git commit -m "Initial project setup with complete tech stack"
 ```
 
-### Step 15.3: Test Key Features
+### Step 11.3: Test Key Features
 1. Navigate to http://localhost:3000
 2. Test routing between pages
 3. Test a form component with JSON Schema
@@ -882,7 +604,7 @@ git commit -m "Initial project setup with complete tech stack"
 5. Test drag & drop functionality
 6. Verify WebSocket connection (if server is running)
 
-## Phase 16: Next Steps
+## Phase 12: Next Steps
 
 ### Recommended Follow-up Tasks
 1. Set up authentication (JWT or OAuth2)
@@ -905,10 +627,7 @@ git commit -m "Initial project setup with complete tech stack"
 - **Solution**: Change port in `vite.config.js` or kill the process using port 3000
 
 **Issue**: WebSocket connection fails
-- **Solution**: Ensure backend server is running and VITE_WS_URL is correct
-
-**Issue**: License verification fails
-- **Solution**: Check package.json dependencies, remove any with incompatible licenses
+- **Solution**: Ensure backend server is running and config.wsUrl is correct
 
 ## Summary
 
@@ -918,9 +637,9 @@ This plan provides a complete setup for a modern React SPA with:
 - ✅ Schema-driven forms with RJSF
 - ✅ Inline rich text with Tiptap
 - ✅ Drag & drop with @dnd-kit
-- ✅ Professional UI with MUI
+- ✅ Professional UI with MUI Core
 - ✅ Security with DOMPurify and CSP
-- ✅ GPL-compliant licensing
-- ✅ Clean architecture boundaries
+- ✅ Code quality with Standard.js
+- ✅ Configuration via JavaScript config file
 
 All dependencies are MIT or Apache-2.0 licensed, with no commercial restrictions or open-core traps.
